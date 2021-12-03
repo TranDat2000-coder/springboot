@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin-Danh-sach-san-pham</title>
+    <th:block th:insert="~{admin/common/link :: link}"></th:block>
+    <style type="text/css">
+        
+	
+        .them a:hover{
+            color: white;
+        }
+        .them a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+	<!-- Page Wrapper -->
+    <div id="wrapper">
+    	<div th:insert="~{admin/common/menu.html :: menu}"></div>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <div th:insert="~{admin/common/header.html :: header}"></div>
+                <!-- End of Topbar -->
+
+                <div class="content-admin-put ml-3">
+                    <div class="d-flex">
+                        <table>
+                            <tr>
+                                <th>Tên thể loại</th>
+                                <th>Ảnh thể loại</th>
+                                <th class="thao-tac">Thao tác</th>
+                            </tr>
+                            <tr th:each="category : ${categoryList}">
+                            	<td th:text="${category.getName()}"></td>
+                                <td>
+                                	<img th:src="@{~/images/{thumb}(thumb=${category.getThumbnail()})}" width="50" height="50">
+                                </td>
+                         
+                                <td class="thao-tac">                                   
+                                    <a th:href="@{/admin-the-loai?id={id}(id = ${category.getId()})}">
+                                    <input type="button" name="put" value="Sửa"/></a>
+                                    <!-- <a th:href="@{/delete/} + ${product.id}">
+                                        <input type="button" value="Xóa">
+                                    </a>  -->                                   
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="them ml-1">
+                        	<a class="btn btn-primary" th:href="@{/admin-the-loai}" role="button" title="Thêm thể loại">
+								<span><i class="fa fa-plus-circle bigger-110 purple"></i></span>
+							</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+       </div>
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <th:block th:insert="~{admin/common/script :: script}"></th:block>
+
+</body>
+
+</html>

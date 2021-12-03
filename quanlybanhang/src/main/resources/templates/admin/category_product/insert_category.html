@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admim thêm thể loại</title>
+
+    <!-- Custom fonts for this template-->
+    <th:block th:insert="~{admin/common/link :: link}"></th:block>
+    <style type="text/css">
+        .form-them-products .picture{
+            margin-left: 20px;
+        }
+
+        .form-them-products .name{
+            margin-left: 23px;
+        }
+
+        .form-them-products .baseprice{
+            margin-left: 79px;
+        }
+
+        .form-them-products .saleprice{
+            margin-left: 66px;
+        }
+
+        .form-them-products .description{
+            margin-left: 81px;
+        }
+
+        .form-them-products .them-btn{
+            margin-left: 130px;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+    	<div th:insert="~{admin/common/menu.html :: menu}"></div>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <div th:insert="~{/admin/common/header.html :: header}"></div>
+                <!-- End of Topbar -->
+                
+                <!-- totalcontent -->
+                <div th:unless="${param.id}" class="form-them-products p-5">
+                    <form th:action="@{/admin-the-loai}" th:method="POST" enctype="multipart/form-data" >
+                        <div th:object="${addCate}">
+                            Ảnh thể loại: <input type="file" path="file" name="file" class="picture mt-2" /> <br>
+                            Tên thể loại: <input type="text" class="name mt-2" name="name" th:field="*{name}"> <br>
+                            Code <input type="text" class="baseprice mt-2" name="code" th:field="*{code}" placeholder="vd:the-thao"><br>
+                            Mô tả: <textarea class="description mt-2 short-them" name="content" rows="4" cols="50" th:field="*{content}"></textarea>
+                       
+                        </div>
+                           
+                        <button class="them-btn" type="submit"><i>Lưu</i></button>
+                    </form>
+                </div>
+
+                <div th:if="${param.id}" class="form-them-products p-5">
+                    <form th:action="@{/admin-the-loai?id={id}(id = ${param.id})}" th:method="PUT" enctype="multipart/form-data">                        
+                        <div th:object="${updateCate}">
+                            Ảnh thể loại: <input type="file" path="file" name="file" class="picture mt-2" /> <br>
+                            Tên thể loại: <input type="text" class="name mt-2" name="name" th:field="*{name}"> <br>
+                            Code <input type="text" class="baseprice mt-2" name="code" th:field="*{code}" placeholder="vd:the-thao"><br>
+                            Mô tả: <textarea class="description mt-2 short-them" name="content" rows="4" cols="50" th:field="*{content}"></textarea>
+                        </div>
+                         
+                        <button class="them-btn" type="submit"><i>Lưu</i></button>
+                    </form>
+                </div>
+                
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:insert="~{admin/common/script :: script}"></th:block>
+
+</body>
+
+</html>

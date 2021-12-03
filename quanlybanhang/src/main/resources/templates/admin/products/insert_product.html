@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin-them-moi-san-pham</title>
+
+    <th:block th:insert="~{admin/common/link :: link}"></th:block>
+    
+    <style type="text/css">
+        .form-them-products .picture{
+            margin-left: 20px;
+        }
+
+        .form-them-products .name{
+            margin-left: 23px;
+        }
+
+        .form-them-products .baseprice{
+            margin-left: 79px;
+        }
+
+        .form-them-products .saleprice{
+            margin-left: 66px;
+        }
+
+        .form-them-products .description{
+            margin-left: 81px;
+        }
+
+        .form-them-products .them-btn{
+            margin-left: 130px;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+    	<div th:insert="~{admin/common/menu.html :: menu}"></div>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <div th:insert="~{/admin/common/header.html :: header}"></div>
+                <!-- End of Topbar -->
+                
+                <!-- totalcontent -->
+                <div th:unless="${param.id}" class="form-them-products p-5">
+                    <form th:action="@{/admin/san-pham}" th:method="POST" enctype="multipart/form-data" >
+                        <div th:object="${product}">
+                            Ảnh sản phẩm: <input type="file" path="file" name="file" class="picture mt-2" /> <br>
+                            Tên sản phẩm: <input type="text" class="name mt-2" name="name" th:field="*{name}"> <br>
+                            Giá cũ: <input type="text" class="baseprice mt-2" name="baseprice" th:field="*{price}"><br>
+                            Giá sale: <input type="text" class="saleprice mt-2" name="saleprice" th:field="*{priceSale}"><br>
+                            Mô tả: <textarea class="description mt-2 short-them" name="description" rows="4" cols="50" th:field="*{description}"></textarea>
+                            Mô tả ngắn: <textarea class="description mt-2 short-them" name="shortdescription" rows="4" cols="50" th:field="*{shortDescription}"></textarea>
+                        </div>
+                            
+                        </textarea> <br>
+                         <div th:object="${info}">
+                         	 Company: <input type="text" name="company" class="mt-2" th:field="*{company}"> <br>
+                         	 Height: <input type="text" name="Height" class="mt-2" th:field="*{height}"> <br>
+                         	 Weight: <input type="text" name="weight" class="mt-2" th:field="*{weight}"> <br>
+                         	 Romphone: <input type="text" name="rom" class="mt-2" th:field="*{romPhone}"> <br>
+                         	 Ramphone: <input type="text" name="ram" class="mt-2" th:field="*{ramPhone}"> <br>                             
+                             Screensize: <input type="text" name="size" class="mt-2" th:field="*{screenSize}"> <br>
+                             Systemversion: <input type="text" name="system" class="mt-2" th:field="*{systemVersion}"> <br>
+                             Chipset: <input type="text" name="chip" class="mt-2" th:field="*{chipset}"> <br>
+                             Pinphone: <input type="text" name="pin" class="mt-2" th:field="*{pinPhone}"> <br>
+                             
+                         </div>
+                        <button class="them-btn" type="submit"><i>Lưu</i></button>
+                    </form>
+                </div>
+
+                <div th:if="${param.id}" class="form-them-products p-5">
+                    <form th:action="@{/admin/san-pham?id={id}&info={info}(id = ${param.id}, info = ${param.info})}" th:method="PUT" enctype="multipart/form-data">                        
+                        <div th:object="${addProduct}">
+                            Ảnh sản phẩm: <input type="file" path="file" name="file" class="picture mt-2" /> <br>
+                            Tên sản phẩm: <input type="text" class="name mt-2" name="name" th:field="*{name}"> <br>
+                            Giá cũ: <input type="text" class="baseprice mt-2" name="baseprice" th:field="*{price}"><br>
+                            Giá sale: <input type="text" class="saleprice mt-2" name="saleprice" th:field="*{priceSale}"><br>
+                            Mô tả: <textarea class="description mt-2 short-them" name="description" rows="4" cols="50" th:field="*{description}"></textarea> <br>
+                            Mô tả ngắn: <textarea class="description mt-2 short-them" name="shortdescription" rows="4" cols="50" th:field="*{shortDescription}"></textarea>
+                        </div>
+                         <div th:object="${addInfo}">
+                             Company: <input type="text" name="company" class="mt-2" th:field="*{company}"> <br>
+                         	 Height: <input type="text" name="Height" class="mt-2" th:field="*{height}"> <br>
+                         	 Weight: <input type="text" name="weight" class="mt-2" th:field="*{weight}"> <br>
+                         	 Romphone: <input type="text" name="rom" class="mt-2" th:field="*{romPhone}"> <br>
+                         	 Ramphone: <input type="text" name="ram" class="mt-2" th:field="*{ramPhone}"> <br>                             
+                             Screensize: <input type="text" name="size" class="mt-2" th:field="*{screenSize}"> <br>
+                             Systemversion: <input type="text" name="system" class="mt-2" th:field="*{systemVersion}"> <br>
+                             Chipset: <input type="text" name="chip" class="mt-2" th:field="*{chipset}"> <br>
+                             Pinphone: <input type="text" name="pin" class="mt-2" th:field="*{pinPhone}"> <br>
+                         </div>
+                        <button class="them-btn" type="submit"><i>Lưu</i></button>
+                    </form>
+                </div>
+                
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:insert="~{admin/common/script :: script}"></th:block>
+
+</body>
+
+</html>
